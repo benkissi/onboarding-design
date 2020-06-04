@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Inner = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 40px;
@@ -45,4 +46,14 @@ export const Icon = styled.div`
   :hover {
     cursor: pointer;
   }
+`;
+
+export const Label = styled.div`
+  position: absolute;
+  display: ${(props) => (props.show ? "block" : "none")};
+  font-size: 12px;
+  background: white;
+  padding: 3px;
+  top: -12px;
+  color: ${(props) => (props.isError ? "#ff6347" : "#A9A9A9")};
 `;

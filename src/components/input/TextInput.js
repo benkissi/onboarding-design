@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Input, Wrapper, Inner, Icon } from "./input-styles";
+import { Input, Wrapper, Inner, Icon, Label } from "./input-styles";
 
 function TextInput({
   placeholder = "Add text here",
@@ -14,16 +14,36 @@ function TextInput({
   isError,
   errorMessage,
 }) {
+  const [isFocused, setFocuseState] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleOnChange = (event) => {
+    const { value } = event.target;
+    onInputChange(event);
+    setInputValue(value);
+  };
+
+  const handleOnblur = (event) => {
+    validate(event);
+    setFocuseState(false);
+  };
+
+  const isEmpty = !!!inputValue.length;
+
   return (
     <Wrapper>
       <Inner isError={isError}>
+        <Label show={isFocused || !isEmpty} isError={isError}>
+          {placeholder}
+        </Label>
         <Input
-          placeholder={placeholder}
+          placeholder={isFocused ? "" : placeholder}
           name={name}
-          onChange={onInputChange}
+          onChange={handleOnChange}
+          onFocus={() => setFocuseState(true)}
           type={type}
           value={value}
-          onBlur={validate}
+          onBlur={handleOnblur}
         />
         {type === "password" ? "" : <Icon icon={icon} />}
       </Inner>

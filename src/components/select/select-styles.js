@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 export const Inner = styled.div`
   display: flex;
   width: 100%;
-  height: 40px;
+  height: 45px;
   padding: 15px 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -39,7 +39,7 @@ export const Icon = styled.div`
   background-image: ${(props) => (props.icon ? `url(${props.icon})` : "")};
   background-size: contain;
   transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0deg)")};
-  transition: transform ease-out 0.5s;
+  transition: transform ease-out 0.2s;
 
   :hover {
     cursor: pointer;
@@ -49,7 +49,7 @@ export const Icon = styled.div`
 export const SelectItems = styled.div`
   display: flex;
   height: ${(props) => (props.show ? "120px" : 0)};
-  transition: all ease-out 0.5s;
+  transition: all ease-out 0.2s;
 `;
 
 export const SelectInner = styled.div`
