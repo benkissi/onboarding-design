@@ -8,12 +8,12 @@ import { isEmail } from "../../utils/validations";
 import { FormWrapper } from "./onboarding-styles";
 
 function StepOne() {
-  const { setAppStore } = useContext(AppContext);
+  const { appStore, setAppStore } = useContext(AppContext);
   const [userDetails, setUserDetails] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "",
+    name: appStore && appStore.name ? appStore.name : "",
+    email: appStore && appStore.email ? appStore.email : "",
+    password: appStore && appStore.password ? appStore.password : "",
+    role: appStore && appStore.role ? appStore.role : "",
     nameError: false,
     emailError: false,
     passwordError: false,
@@ -22,28 +22,31 @@ function StepOne() {
     passwordErrorMessage: "",
     emailErrorMessage: "",
     roleErrorMessage: "",
+    started: false,
   });
 
   useEffect(() => {
     console.log("state", userDetails);
-    setAppStore((prevState) => {
-      return {
-        ...prevState,
-        name: userDetails.name,
-        email: userDetails.email,
-        password: userDetails.password,
-        role: userDetails.role,
-        error:
-          userDetails.nameError ||
-          userDetails.emailError ||
-          userDetails.passwordError ||
-          userDetails.roleError ||
-          !userDetails.name ||
-          !userDetails.email ||
-          !userDetails.password ||
-          !userDetails.role,
-      };
-    });
+    if (userDetails.started) {
+      setAppStore((prevState) => {
+        return {
+          ...prevState,
+          name: userDetails.name,
+          email: userDetails.email,
+          password: userDetails.password,
+          role: userDetails.role,
+          error:
+            userDetails.nameError ||
+            userDetails.emailError ||
+            userDetails.passwordError ||
+            userDetails.roleError ||
+            !userDetails.name ||
+            !userDetails.email ||
+            !userDetails.password ||
+            !userDetails.role,
+        };
+      });
+    }
   }, [userDetails]);
 
   const handleInputChange = (event) => {
@@ -53,6 +56,7 @@ function StepOne() {
       return {
         ...prevState,
         [key]: value,
+        started: true,
       };
     });
   };
@@ -162,6 +166,7 @@ function StepOne() {
               icon="arrow.svg"
               list={selectionList}
               name="role"
+              value={userDetails.role}
               onSelect={handleSelect}
             />
           </div>

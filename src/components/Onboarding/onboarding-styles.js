@@ -18,6 +18,10 @@ export const Wrapper = styled.div`
     margin-top: 50px;
     line-height: 30px;
   }
+
+  @media only screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 
 export const Content = styled.div`
@@ -34,6 +38,10 @@ export const Content = styled.div`
     width: 150px;
     /* margin-bottom: auto; */
     align-self: flex-end;
+  }
+
+  @media only screen and (max-width: 750px) {
+    order: 2;
   }
 `;
 
@@ -56,6 +64,10 @@ export const RightPane = styled.div`
   flex: 1;
   color: white;
   background-color: #296efa;
+
+  @media only screen and (max-width: 750px) {
+    order: 1;
+  }
 `;
 
 export const FormWrapper = styled.div`
@@ -70,7 +82,7 @@ export const FormWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 40%;
+    width: 50%;
   }
 
   .form {
@@ -82,6 +94,12 @@ export const FormWrapper = styled.div`
   .input {
     width: 90%;
     margin: 10px 0;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .form-inner {
+      width: 90%;
+    }
   }
 `;
 
@@ -98,11 +116,21 @@ export const Actions = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 40%;
+    width: 50%;
   }
 
   .button {
     width: 90%;
     margin-top: 40px;
+  }
+
+  .back {
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .actions-inner {
+      width: 90%;
+    }
   }
 `;

@@ -17,9 +17,11 @@ function Select({
   list,
   role,
   onSelect,
+  value,
 }) {
+  const selectionInput = value ? value : "";
   const [toggleSelect, setToggle] = useState(false);
-  const [selection, setSelection] = useState("");
+  const [selection, setSelection] = useState(selectionInput);
 
   const handleSelection = (selection) => {
     setSelection(selection);

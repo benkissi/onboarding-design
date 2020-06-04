@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
 import Progress from "../progress";
 import Button from "../button";
 
@@ -35,6 +36,21 @@ function Onboarding() {
       };
     });
   };
+
+  const handleBack = () => {
+    console.log("next");
+    setAppStore((prevState) => {
+      return {
+        ...prevState,
+        step: prevState.step - 1,
+      };
+    });
+  };
+
+  const onboardingStep =
+    appStore.step === 1 ? <StepOne /> : appStore.step == 2 ? <StepTwo /> : "";
+
+  const nextState = appStore.step > 1 ? true : !buttonActive;
   return (
     <Wrapper>
       <Content>
@@ -42,18 +58,19 @@ function Onboarding() {
           <Progress />
         </div>
         <ContentInner>
-          <div className="step">
-            <StepOne />
-          </div>
+          <div className="step">{onboardingStep}</div>
           <Actions>
             <div className="actions-inner">
               <div className="button">
-                <Button
-                  text="Next"
-                  disabled={!buttonActive}
-                  click={handleNext}
-                />
+                <Button text="Next" disabled={nextState} click={handleNext} />
               </div>
+              {appStore.step > 1 ? (
+                <div className="back" onClick={handleBack}>
+                  <p className="highlight">Back</p>
+                </div>
+              ) : (
+                ""
+              )}
               <div>
                 <p className="notice">
                   By clicking the "Next" button, you agree to creating a free
